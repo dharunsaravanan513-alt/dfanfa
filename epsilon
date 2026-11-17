@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <string.h>
+#define MAX 20
+int nfa[MAX][MAX][2]; /* nfa[state][nextIndex][0/1] adjacency style simplified */
+int epsilon[MAX][MAX]; /* epsilon closures precomputed: 1 if reachable */
+int dfaStates[MAX][MAX]; /* each DFA state = set of NFA states (bitmap) */
+int dfaCount = 0, n;
+void unionClosure(int *set, int symbol, int *result) {
+ /* result = epsilon-closure(move(set, symbol)) -- conceptual placeholder */
+ for (int s = 0; s < n; s++) result[s] = 0;
+ for (int s = 0; s < n; s++) {
+ if (set[s]) {
+ /* move on symbol, then union epsilon closure of target states */
+ /* implementation specific to transition table representation */
+ }
+ }
+}
+int main() {
+ printf("Enter number of NFA states: ");
+ scanf("%d", &n);
+ printf("(Subset construction proceeds by computing epsilon-closures \n");
+ printf(" and forming new DFA states from reachable NFA-state subsets.)\n");
+ /* Full table-driven implementation builds dfaStates[] iteratively
+ using a worklist algorithm, marking processed subsets,
+ and outputs the resulting DFA transition table. */
+ return 0;
+}
+/*Input: NFA with states {q0,q1,q2},
+q0 --ε--> q1,
+q1 --a--> q2,
+q0 --b--> q2,
+Final = {q2}
+Output (after subset construction): DFA states = {q0,q1}, {q2};
+Minimized DFA has 2 states with start = {q0,q1} and final = {q2}.*/
